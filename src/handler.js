@@ -96,16 +96,16 @@ const getAllBooksHandler = (request, h) => {
       }
     });
   }
-  if (reading !== undefined) {
+  if (name !== undefined) {
     books.forEach(function (book) {
-      if (book.name.includes(name)) {
+      if (book.name.toLowerCase().includes(name.toLowerCase())) {
         const bookFiltered = filteredBook(book);
         booksFiltered.push(bookFiltered);
       }
     });
   }
 
-  if (reading === undefined && finished === undefined && reading === undefined) {
+  if (reading === undefined && finished === undefined && name === undefined) {
     books.forEach(function (book) {
       const bookFiltered = filteredBook(book);
       booksFiltered.push(bookFiltered);
@@ -142,25 +142,6 @@ function filteredBook(book) {
 
   return bookFiltered;
 }
-
-// const getAllBooksHandler = () => {
-//     const booksFiltered = [];
-//     books.forEach(function (book) {
-//       const { id, name, publisher } = book;
-//       const bookFiltered = {
-//         id,
-//         name,
-//         publisher,
-//       };
-//       booksFiltered.push(bookFiltered);
-//     });
-//     return {
-//       status: "success",
-//       data: {
-//         books: booksFiltered,
-//       },
-//     };
-//   };
 
 const getBookByIdHandler = (request, h) => {
   const { bookId } = request.params;
